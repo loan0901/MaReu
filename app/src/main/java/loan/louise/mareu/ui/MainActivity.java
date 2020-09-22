@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-
         List<Meeting> meetingList = new ArrayList<Meeting>();
         meetingList.add(new Meeting(1,"A", "16H00", "Mario", "mario@gmail.com", 10));
         meetingList.add(new Meeting(2,"B", "16H00", "Mario", "mario@gmail.com", 10));
@@ -34,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         meetingList.add(new Meeting(4,"D", "16H00", "Mario", "mario@gmail.com", 10));
         meetingList.add(new Meeting(5,"E", "16H00", "Mario", "mario@gmail.com", 10));
 
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         MeetingAdapter adapter = new MeetingAdapter(meetingList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
