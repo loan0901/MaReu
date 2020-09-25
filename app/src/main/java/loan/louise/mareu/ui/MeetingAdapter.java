@@ -11,13 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 import java.util.Random;
 
+import loan.louise.mareu.Event.DeleteMeetingEvent;
 import loan.louise.mareu.R;
 import loan.louise.mareu.model.Meeting;
 
-public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHolder> {
+public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHolder>{
 
     private List<Meeting> meetingList;
 
@@ -36,6 +39,15 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.display(meetingList.get(position));
+
+        //DeleteEvent
+        final Meeting meeting = meetingList.get(position);
+        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
+            }
+        });
     }
 
     @Override

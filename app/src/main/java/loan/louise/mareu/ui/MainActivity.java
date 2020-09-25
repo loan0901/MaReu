@@ -5,35 +5,32 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.ReceiverCallNotAllowedException;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
+import loan.louise.mareu.DI.DI;
+import loan.louise.mareu.Event.DeleteMeetingEvent;
 import loan.louise.mareu.R;
-import loan.louise.mareu.model.Meeting;
+import loan.louise.mareu.service.ApiService;
+import loan.louise.mareu.service.MeetingApiService;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        List<Meeting> meetingList = new ArrayList<Meeting>();
-        meetingList.add(new Meeting(1,"A", "16H00", "Mario", "mario@gmail.com", 10));
-        meetingList.add(new Meeting(2,"B", "16H00", "Mario", "mario@gmail.com", 10));
-        meetingList.add(new Meeting(3,"C", "16H00", "Mario", "mario@gmail.com", 10));
-        meetingList.add(new Meeting(4,"D", "16H00", "Mario", "mario@gmail.com", 10));
-        meetingList.add(new Meeting(5,"E", "16H00", "Mario", "mario@gmail.com", 10));
+        apiService = DI.getMeetingApiService();
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        MeetingAdapter adapter = new MeetingAdapter(meetingList);
+        MeetingAdapter adapter = new MeetingAdapter(apiService.getMeeting());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
@@ -45,5 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent = new Intent(MainActivity.this, AddMeetingActivity.class);
         startActivity(intent);
+    }
+
+    @Subscribe
+    public void onDeleteMeeting(DeleteMeetingEvent event) {
+        ApiService.deleteMeeting(event.meeting);
     }
 }
