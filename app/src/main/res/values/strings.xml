@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MaReu</string>
+    <string name="meeting_label">Réunion %1$s</string>
+    <string name="description_label">%1$s - %2$s - %3$s</string>
 </resources>

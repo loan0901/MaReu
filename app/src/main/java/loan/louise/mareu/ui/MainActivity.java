@@ -17,11 +17,11 @@ import loan.louise.mareu.DI.DI;
 import loan.louise.mareu.Event.DeleteMeetingEvent;
 import loan.louise.mareu.R;
 import loan.louise.mareu.service.ApiService;
-import loan.louise.mareu.service.MeetingApiService;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ApiService apiService;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +29,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         apiService = DI.getMeetingApiService();
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
+        FloatingActionButton createButton = findViewById(R.id.addActivityButton);
+        createButton.setOnClickListener(this);
+
+        initList();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    private void initList() {
         MeetingAdapter adapter = new MeetingAdapter(apiService.getMeeting());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-        FloatingActionButton creatButton = findViewById(R.id.addActivityButton);
-        creatButton.setOnClickListener(this);
     }
 
     @Override
@@ -46,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Subscribe
     public void onDeleteMeeting(DeleteMeetingEvent event) {
-        ApiService.deleteMeeting(event.meeting);
+        apiService.deleteMeeting(event.meeting);
+        initList();
     }
 }
