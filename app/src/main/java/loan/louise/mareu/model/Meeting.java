@@ -2,14 +2,14 @@ package loan.louise.mareu.model;
 
 public class Meeting {
 
-    private int id;
+    private long id;
     private String meetingRoom;
     private String meetingHour;
     private String meetingSubject;
     private String mail;
     private int meetingDate;
 
-    public Meeting(int id, String meetingRoom, String meetingHour, String meetingSubject, String mail, int meetingDate) {
+    public Meeting(long id, String meetingRoom, String meetingHour, int meetingDate, String meetingSubject, String mail) {
 
         this.id = id;
         this.meetingRoom = meetingRoom;
@@ -18,11 +18,11 @@ public class Meeting {
         this.mail = mail;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

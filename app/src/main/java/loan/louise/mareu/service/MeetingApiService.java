@@ -18,5 +18,10 @@ public class MeetingApiService implements ApiService {
         meetingList.remove(meeting);
     }
 
+    @Override
+    public void creatMeeting(Meeting meeting) {
+        meetingList.add(meeting);
+    }
+
 
 }
