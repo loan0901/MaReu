@@ -1,5 +1,7 @@
 package loan.louise.mareu.model;
 
+import java.util.Date;
+
 public class Meeting {
 
     private long id;
@@ -7,9 +9,9 @@ public class Meeting {
     private String meetingHour;
     private String meetingSubject;
     private String mail;
-    private int meetingDate;
+    private Date meetingDate;
 
-    public Meeting(long id, String meetingRoom, String meetingHour, int meetingDate, String meetingSubject, String mail) {
+    public Meeting(long id, String meetingRoom, String meetingHour, Date meetingDate, String meetingSubject, String mail) {
 
         this.id = id;
         this.meetingRoom = meetingRoom;
@@ -58,11 +60,11 @@ public class Meeting {
         this.mail = mail;
     }
 
-    public int getMeetingDate() {
+    public Date getMeetingDate() {
         return meetingDate;
     }
 
-    public void setMeetingDate(int meetingDate) {
+    public void setMeetingDate(Date meetingDate) {
         this.meetingDate = meetingDate;
     }
 

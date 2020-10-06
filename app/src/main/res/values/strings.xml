@@ -1,14 +1,14 @@
 <resources>
 
     <string name="app_name">MaReu</string>
-    <string name="meeting_label">Réunion %1$s - %2$s - %3$s</string>
+    <string name="meeting_label">%1$s - %2$s - %3$s</string>
 
     <string-array name="meeting_room">
-        <item>A</item>
-        <item>B</item>
-        <item>C</item>
-        <item>D</item>
-        <item>E</item>
+        <item>Réunion A</item>
+        <item>Réunion B</item>
+        <item>Réunion C</item>
+        <item>Réunion D</item>
+        <item>Réunion E</item>
     </string-array>
 
 

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -39,7 +40,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     private TextView textViewHour, textViewDate;
     private EditText editTextSubject, editTextMail;
     private int meetingHour, meetingMinute;
-    private int dateData;
+    private Date meetingDate;
     DatePickerDialog.OnDateSetListener setListenerDate;
     TimePickerDialog.OnTimeSetListener setListenerTime;
     private ApiService apiService;
@@ -59,7 +60,7 @@ public class AddMeetingActivity extends AppCompatActivity {
 
         getMeetingDate();
         getMeetingRoom();
-        getHour();
+        getMeetingHour();
         createMeeting();
     }
 
@@ -73,8 +74,7 @@ public class AddMeetingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        AddMeetingActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, setListenerDate, year, month, day);
-                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        AddMeetingActivity.this, setListenerDate, year, month, day);
                 datePickerDialog.show();
             }
         });
@@ -82,26 +82,21 @@ public class AddMeetingActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month+1;
-                String date = day+"/"+month+"/"+year;
+                String date = dayOfMonth+"/"+month+"/"+year;
                 textViewDate.setText(date);
-                dateData = year+month+day;
+                meetingDate = new Date(year,month,dayOfMonth);
             }
         };
     }
 
-    private void getHour() {
-
-        Calendar calendar = Calendar.getInstance();
-        final int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        final int minute = calendar.get(Calendar.MINUTE);
+    private void getMeetingHour() {
 
         textViewHour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(
-                        AddMeetingActivity.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth, setListenerTime, hour, minute, true);
-                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        AddMeetingActivity.this, setListenerTime, 12, 0, false);
+                timePickerDialog.updateTime(meetingHour,meetingMinute);
                 timePickerDialog.show();
             }
         });
@@ -110,12 +105,9 @@ public class AddMeetingActivity extends AppCompatActivity {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 meetingHour = hourOfDay;
                 meetingMinute = minute;
-                String zeroMin = "";
-                String zeroHour = "";
-                if(meetingHour<10){zeroHour = "0";}
-                if(meetingMinute<10){zeroMin = "0";}
-                String time = zeroHour + meetingHour + "h" + zeroMin + meetingMinute;
-                textViewHour.setText(time);
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(0,0,0, meetingHour, meetingMinute);
+                textViewHour.setText(DateFormat.format("hh:mm aa", calendar));
             }
         };
     }
@@ -130,17 +122,24 @@ public class AddMeetingActivity extends AppCompatActivity {
             createButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (textViewDate.getText().toString().isEmpty() ||
+                            textViewHour.getText().toString().isEmpty() ||
+                            editTextMail.getText().toString().isEmpty() ||
+                            editTextSubject.getText().toString().isEmpty()) {
+                        Toast.makeText(AddMeetingActivity.this, "non", Toast.LENGTH_LONG).show();
+                    } else {
                         Meeting meeting = new Meeting(
                                 System.currentTimeMillis(),
                                 spinnerRoom.getSelectedItem().toString(),
                                 textViewHour.getText().toString(),
-                                dateData,
+                                meetingDate,
                                 editTextSubject.getText().toString(),
                                 editTextMail.getText().toString()
                         );
                         apiService.creatMeeting(meeting);
                         finish();
                     }
+                }
             });
     }
 }
