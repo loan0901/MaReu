@@ -27,6 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import loan.louise.mareu.DI.DI;
 import loan.louise.mareu.R;
@@ -84,9 +85,18 @@ public class AddMeetingActivity extends AppCompatActivity {
                 month = month+1;
                 String date = dayOfMonth+"/"+month+"/"+year;
                 textViewDate.setText(date);
-                meetingDate = new Date(year,month,dayOfMonth);
+                meetingDate = getSelectedDate(date);
             }
         };
+    }
+
+    private Date getSelectedDate(String dateString) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        try {
+            return formatter.parse(dateString);
+        } catch (ParseException e) {
+            return null;
+        }
     }
 
     private void getMeetingHour() {
