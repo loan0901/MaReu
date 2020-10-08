@@ -11,9 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Random;
 
 import loan.louise.mareu.R;
+import loan.louise.mareu.databinding.AddMeetingBinding;
+import loan.louise.mareu.databinding.MeetingItemBinding;
 import loan.louise.mareu.model.Meeting;
 
     public class MeetingViewHolder extends RecyclerView.ViewHolder {
+
+        private MeetingItemBinding binding;
 
         ImageView colorImage;
         TextView meetingRoomTextView;

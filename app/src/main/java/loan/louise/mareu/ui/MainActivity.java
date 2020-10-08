@@ -16,20 +16,25 @@ import org.greenrobot.eventbus.Subscribe;
 import loan.louise.mareu.DI.DI;
 import loan.louise.mareu.Event.DeleteMeetingEvent;
 import loan.louise.mareu.R;
+import loan.louise.mareu.databinding.ActivityMainBinding;
 import loan.louise.mareu.service.ApiService;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ApiService apiService;
-    private RecyclerView recyclerView;
+    //private RecyclerView recyclerView;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         apiService = DI.getMeetingApiService();
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
-        recyclerView = findViewById(R.id.recyclerView);
+        //recyclerView = findViewById(R.id.recyclerView);
         FloatingActionButton createButton = findViewById(R.id.addActivityButton);
         createButton.setOnClickListener(this);
 
@@ -56,8 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initList() {
         MeetingAdapter adapter = new MeetingAdapter(apiService.getMeeting());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        binding.recyclerView.setAdapter(adapter);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
     }
 
     @Override

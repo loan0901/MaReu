@@ -9,7 +9,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="#0D000000"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addActivityButton"
@@ -18,11 +19,11 @@
         android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp"
         android:src="@drawable/ic_add_button"
-        app:backgroundTint="#F2C40D0D"
-        app:fabCustomSize="65dp"
+        app:backgroundTint="#F3E83F29"
+        app:fabCustomSize="70dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="35dp" />
+        app:maxImageSize="40dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

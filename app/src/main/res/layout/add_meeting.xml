@@ -2,60 +2,101 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#0D000000">
 
+    <TextView
+        android:id="@+id/tvReunion"
+        android:text="Salle de Réunion :"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="#A6000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="60dp"/>
 
     <Spinner
         android:id="@+id/spinnerRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/tvReunion"
+        app:layout_constraintTop_toTopOf="@id/tvReunion"
+        android:layout_marginStart="10dp" />
 
     <TextView
         android:id="@+id/timePicker"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="230dp"
+        android:drawableTop="@drawable/ic_time_24"
+        android:paddingTop="15dp"
+        android:layout_width="170dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
+        android:hint="select time"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:hint="select time"/>
+        app:layout_constraintTop_toBottomOf="@id/tvReunion"
+        android:background="@android:drawable/editbox_background"/>
 
     <TextView
         android:id="@+id/datePicker"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="260dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:hint="select date"/>
+        android:paddingTop="15dp"
+        android:layout_width="170dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:hint="select date"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvReunion"
+        android:background="@android:drawable/editbox_background"
+        app:drawableTopCompat="@drawable/ic_date_24" />
 
     <EditText
         android:id="@+id/editTextSubject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="290dp"
-        android:hint="Subject"/>
+        app:layout_constraintTop_toBottomOf="@id/timePicker"
+        android:layout_margin="30dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:padding="15dp"
+        android:textColor="#A6000000"
+        android:hint="Sujet de la réunion :"/>
 
     <EditText
         android:id="@+id/editTextMail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
+        android:layout_margin="30dp"
         android:inputType="textEmailAddress"
-        android:hint="mail"
+        android:hint="Adresse E-mail :"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:padding="15dp"
+        android:textColor="#A6000000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/editTextSubject" />
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/createButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ok"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/ic_check_24"
+        app:backgroundTint="#E60DC450"
+        app:fabCustomSize="70dp"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="40dp"
+        android:focusable="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

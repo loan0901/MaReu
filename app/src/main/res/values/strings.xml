@@ -4,11 +4,11 @@
     <string name="meeting_label">%1$s - %2$s - %3$s</string>
 
     <string-array name="meeting_room">
-        <item>Réunion A</item>
-        <item>Réunion B</item>
-        <item>Réunion C</item>
-        <item>Réunion D</item>
-        <item>Réunion E</item>
+        <item>Salle A</item>
+        <item>Salle B</item>
+        <item>Salle C</item>
+        <item>Salle D</item>
+        <item>Salle E</item>
     </string-array>
 
 

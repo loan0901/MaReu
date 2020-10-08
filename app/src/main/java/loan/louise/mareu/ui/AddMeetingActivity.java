@@ -2,62 +2,42 @@ package loan.louise.mareu.ui;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.w3c.dom.Text;
-
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
 import loan.louise.mareu.DI.DI;
 import loan.louise.mareu.R;
+import loan.louise.mareu.databinding.AddMeetingBinding;
 import loan.louise.mareu.model.Meeting;
 import loan.louise.mareu.service.ApiService;
 
 public class AddMeetingActivity extends AppCompatActivity {
 
-    private Spinner spinnerRoom;
-    private Button createButton;
-    private TextView textViewHour, textViewDate;
-    private EditText editTextSubject, editTextMail;
+    private AddMeetingBinding binding;
+    private ApiService apiService;
     private int meetingHour, meetingMinute;
     private Date meetingDate;
     DatePickerDialog.OnDateSetListener setListenerDate;
     TimePickerDialog.OnTimeSetListener setListenerTime;
-    private ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_meeting);
         apiService = DI.getMeetingApiService();
-
-        spinnerRoom = findViewById(R.id.spinnerRoom);
-        createButton = findViewById(R.id.createButton);
-        textViewHour = findViewById(R.id.timePicker);
-        textViewDate = findViewById(R.id.datePicker);
-        editTextSubject = findViewById(R.id.editTextSubject);
-        editTextMail = findViewById(R.id.editTextMail);
+        binding = AddMeetingBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
         getMeetingDate();
         getMeetingRoom();
@@ -71,7 +51,7 @@ public class AddMeetingActivity extends AppCompatActivity {
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        textViewDate.setOnClickListener(new View.OnClickListener() {
+        binding.datePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
@@ -84,7 +64,7 @@ public class AddMeetingActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month+1;
                 String date = dayOfMonth+"/"+month+"/"+year;
-                textViewDate.setText(date);
+                binding.datePicker.setText(date);
                 meetingDate = getSelectedDate(date);
             }
         };
@@ -101,7 +81,7 @@ public class AddMeetingActivity extends AppCompatActivity {
 
     private void getMeetingHour() {
 
-        textViewHour.setOnClickListener(new View.OnClickListener() {
+        binding.timePicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(
@@ -117,34 +97,34 @@ public class AddMeetingActivity extends AppCompatActivity {
                 meetingMinute = minute;
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(0,0,0, meetingHour, meetingMinute);
-                textViewHour.setText(DateFormat.format("hh:mm aa", calendar));
+                binding.timePicker.setText(DateFormat.format("hh:mm aa", calendar));
             }
         };
     }
 
     private void getMeetingRoom() {
-        ArrayAdapter<String> roomAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.meeting_room));
+        ArrayAdapter<String> roomAdapter = new ArrayAdapter<>(this, R.layout.spinner_resource, getResources().getStringArray(R.array.meeting_room));
         roomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerRoom.setAdapter(roomAdapter);
+        binding.spinnerRoom.setAdapter(roomAdapter);
     }
 
     private void createMeeting() {
-            createButton.setOnClickListener(new View.OnClickListener() {
+            binding.createButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (textViewDate.getText().toString().isEmpty() ||
-                            textViewHour.getText().toString().isEmpty() ||
-                            editTextMail.getText().toString().isEmpty() ||
-                            editTextSubject.getText().toString().isEmpty()) {
+                    if (binding.datePicker.getText().toString().isEmpty() ||
+                            binding.timePicker.getText().toString().isEmpty() ||
+                            binding.editTextMail.getText().toString().isEmpty() ||
+                            binding.editTextSubject.getText().toString().isEmpty()) {
                         Toast.makeText(AddMeetingActivity.this, "non", Toast.LENGTH_LONG).show();
                     } else {
                         Meeting meeting = new Meeting(
                                 System.currentTimeMillis(),
-                                spinnerRoom.getSelectedItem().toString(),
-                                textViewHour.getText().toString(),
+                                binding.spinnerRoom.getSelectedItem().toString(),
+                                binding.timePicker.getText().toString(),
                                 meetingDate,
-                                editTextSubject.getText().toString(),
-                                editTextMail.getText().toString()
+                                binding.editTextSubject.getText().toString(),
+                                binding.editTextMail.getText().toString()
                         );
                         apiService.creatMeeting(meeting);
                         finish();
