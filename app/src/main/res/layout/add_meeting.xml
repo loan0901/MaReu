@@ -78,6 +78,7 @@
         android:layout_margin="30dp"
         android:inputType="textEmailAddress"
         android:hint="Adresse E-mail :"
+        android:imeOptions="actionDone"
         android:textStyle="bold"
         android:textSize="20sp"
         android:padding="15dp"
@@ -99,4 +100,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="40dp"
         android:focusable="true" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/editTextMail"
+        app:layout_constraintStart_toStartOf="@id/editTextMail" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

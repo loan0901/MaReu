@@ -22,7 +22,6 @@ import loan.louise.mareu.service.ApiService;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ApiService apiService;
-    //private RecyclerView recyclerView;
     private ActivityMainBinding binding;
 
     @Override
@@ -34,10 +33,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View view = binding.getRoot();
         setContentView(view);
 
-        //recyclerView = findViewById(R.id.recyclerView);
         FloatingActionButton createButton = findViewById(R.id.addActivityButton);
         createButton.setOnClickListener(this);
 
+        //binding.addActivityButton.setOnClickListener(this);
+
+        //initBinding();
         initList();
     }
 
@@ -76,4 +77,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         apiService.deleteMeeting(event.meeting);
         initList();
     }
+
+    //private void initBinding(){
+    //    binding = ActivityMainBinding.inflate(getLayoutInflater());
+    //    View view = binding.getRoot();
+    //    setContentView(view);
+    //}
 }

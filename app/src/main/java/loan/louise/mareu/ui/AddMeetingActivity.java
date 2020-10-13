@@ -4,9 +4,13 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,14 +39,30 @@ public class AddMeetingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_meeting);
         apiService = DI.getMeetingApiService();
-        binding = AddMeetingBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
 
+        addShip();
+        initBinding();
         getMeetingDate();
         getMeetingRoom();
         getMeetingHour();
         createMeeting();
+    }
+
+    private void addShip(){
+
+        EditText editTextEmail = findViewById(R.id.editTextMail);
+        editTextEmail.setOnEditorActionListener(new EditText.OnEditorActionListener(){
+        //binding.editTextMail.setOnEditorActionListener(new EditText.OnEditorActionListener(){
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE){
+                    Toast.makeText(AddMeetingActivity.this, "ca fonctionne", Toast.LENGTH_LONG).show();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
     }
 
     private void getMeetingDate() {
@@ -131,5 +151,11 @@ public class AddMeetingActivity extends AppCompatActivity {
                     }
                 }
             });
+    }
+
+    private void initBinding(){
+        binding = AddMeetingBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
     }
 }

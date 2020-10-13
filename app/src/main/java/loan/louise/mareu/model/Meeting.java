@@ -16,6 +16,7 @@ public class Meeting {
         this.id = id;
         this.meetingRoom = meetingRoom;
         this.meetingHour = meetingHour;
+        this.meetingDate = meetingDate;
         this.meetingSubject = meetingSubject;
         this.mail = mail;
     }
