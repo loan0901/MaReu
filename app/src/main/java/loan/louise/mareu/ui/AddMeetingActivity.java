@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
@@ -13,12 +14,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
 import loan.louise.mareu.DI.DI;
 import loan.louise.mareu.R;
 import loan.louise.mareu.databinding.AddMeetingBinding;
@@ -37,30 +44,39 @@ public class AddMeetingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_meeting);
         apiService = DI.getMeetingApiService();
 
-        addShip();
         initBinding();
+        addShip();
         getMeetingDate();
         getMeetingRoom();
         getMeetingHour();
         createMeeting();
     }
 
-    private void addShip(){
-
-        EditText editTextEmail = findViewById(R.id.editTextMail);
-        editTextEmail.setOnEditorActionListener(new EditText.OnEditorActionListener(){
-        //binding.editTextMail.setOnEditorActionListener(new EditText.OnEditorActionListener(){
+    private void addShip() {
+        binding.editTextMail.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE){
-                    Toast.makeText(AddMeetingActivity.this, "ca fonctionne", Toast.LENGTH_LONG).show();
+            public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    chipItem(view.getText().toString());
+                    view.setText("");
                     return true;
-                } else {
-                    return false;
                 }
+                return false;
+            }
+        });
+    }
+
+    private void chipItem(String emailAddress) {
+        LayoutInflater inflater = LayoutInflater.from(AddMeetingActivity.this);
+        Chip chip = (Chip) inflater.inflate(R.layout.chip_item,null,false);
+        chip.setText(emailAddress);
+        binding.emailsGroup.addView(chip);
+        chip.setOnCloseIconClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.emailsGroup.removeView(v);
             }
         });
     }
@@ -82,8 +98,8 @@ public class AddMeetingActivity extends AppCompatActivity {
         setListenerDate = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month+1;
-                String date = dayOfMonth+"/"+month+"/"+year;
+                month = month + 1;
+                String date = dayOfMonth + "/" + month + "/" + year;
                 binding.datePicker.setText(date);
                 meetingDate = getSelectedDate(date);
             }
@@ -106,7 +122,7 @@ public class AddMeetingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(
                         AddMeetingActivity.this, setListenerTime, 12, 0, false);
-                timePickerDialog.updateTime(meetingHour,meetingMinute);
+                timePickerDialog.updateTime(meetingHour, meetingMinute);
                 timePickerDialog.show();
             }
         });
@@ -116,7 +132,7 @@ public class AddMeetingActivity extends AppCompatActivity {
                 meetingHour = hourOfDay;
                 meetingMinute = minute;
                 Calendar calendar = Calendar.getInstance();
-                calendar.set(0,0,0, meetingHour, meetingMinute);
+                calendar.set(0, 0, 0, meetingHour, meetingMinute);
                 binding.timePicker.setText(DateFormat.format("hh:mm aa", calendar));
             }
         };
@@ -128,32 +144,42 @@ public class AddMeetingActivity extends AppCompatActivity {
         binding.spinnerRoom.setAdapter(roomAdapter);
     }
 
-    private void createMeeting() {
-            binding.createButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (binding.datePicker.getText().toString().isEmpty() ||
-                            binding.timePicker.getText().toString().isEmpty() ||
-                            binding.editTextMail.getText().toString().isEmpty() ||
-                            binding.editTextSubject.getText().toString().isEmpty()) {
-                        Toast.makeText(AddMeetingActivity.this, "non", Toast.LENGTH_LONG).show();
-                    } else {
-                        Meeting meeting = new Meeting(
-                                System.currentTimeMillis(),
-                                binding.spinnerRoom.getSelectedItem().toString(),
-                                binding.timePicker.getText().toString(),
-                                meetingDate,
-                                binding.editTextSubject.getText().toString(),
-                                binding.editTextMail.getText().toString()
-                        );
-                        apiService.creatMeeting(meeting);
-                        finish();
-                    }
-                }
-            });
+    private String getMail() {
+        String eMail;
+        for (int i=0; i < binding.emailsGroup.getChildCount(); i++){
+            //ajouter le text du chip avec une virgule dans un String
+            // example ajouter a eMail: binding.emailsGroup.getChildAt(i).toString() + ", ";
+        }
+        return eMail;
     }
 
-    private void initBinding(){
+    private void createMeeting() {
+        binding.createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (binding.datePicker.getText().toString().isEmpty() ||
+                        binding.timePicker.getText().toString().isEmpty() ||
+                        binding.emailsGroup.getChildCount()<1 ||
+                        binding.editTextSubject.getText().toString().isEmpty()) {
+                    Toast.makeText(AddMeetingActivity.this, "non", Toast.LENGTH_LONG).show();
+                } else {
+                    Meeting meeting = new Meeting(
+                            System.currentTimeMillis(),
+                            binding.spinnerRoom.getSelectedItem().toString(),
+                            binding.timePicker.getText().toString(),
+                            meetingDate,
+                            binding.editTextSubject.getText().toString(),
+                            binding.editTextMail.getText().toString()
+                            //getMail()
+                    );
+                    apiService.creatMeeting(meeting);
+                    finish();
+                }
+            }
+        });
+    }
+
+    private void initBinding() {
         binding = AddMeetingBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);

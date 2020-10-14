@@ -27,19 +27,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         apiService = DI.getMeetingApiService();
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
 
-        FloatingActionButton createButton = findViewById(R.id.addActivityButton);
-        createButton.setOnClickListener(this);
-
-        //binding.addActivityButton.setOnClickListener(this);
-
-        //initBinding();
+        initBinding();
         initList();
+        binding.addActivityButton.setOnClickListener(this);
     }
 
     @Override
@@ -78,9 +70,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initList();
     }
 
-    //private void initBinding(){
-    //    binding = ActivityMainBinding.inflate(getLayoutInflater());
-    //    View view = binding.getRoot();
-    //    setContentView(view);
-    //}
+    private void initBinding(){
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+    }
 }
