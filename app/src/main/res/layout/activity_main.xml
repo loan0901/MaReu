@@ -19,6 +19,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp"
         android:src="@drawable/ic_add_button"
+        app:tint="@android:color/white"
         app:backgroundTint="#F3E83F29"
         app:fabCustomSize="70dp"
         android:clickable="true"

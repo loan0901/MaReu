@@ -40,6 +40,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     private Date meetingDate;
     DatePickerDialog.OnDateSetListener setListenerDate;
     TimePickerDialog.OnTimeSetListener setListenerTime;
+    private String emailResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,13 +145,13 @@ public class AddMeetingActivity extends AppCompatActivity {
         binding.spinnerRoom.setAdapter(roomAdapter);
     }
 
-    private String getMail() {
-        String eMail;
-        for (int i=0; i < binding.emailsGroup.getChildCount(); i++){
-            //ajouter le text du chip avec une virgule dans un String
-            // example ajouter a eMail: binding.emailsGroup.getChildAt(i).toString() + ", ";
+    public String getEmailFromChipGroup() {
+        ChipGroup chipGroup = binding.emailsGroup;
+        for (int i = 0; i < chipGroup.getChildCount(); i++) {
+            Chip chip = (Chip) chipGroup.getChildAt(i);
+            emailResult = emailResult + chip.getText().toString() + ", ";
         }
-        return eMail;
+        return emailResult;
     }
 
     private void createMeeting() {
@@ -169,8 +170,7 @@ public class AddMeetingActivity extends AppCompatActivity {
                             binding.timePicker.getText().toString(),
                             meetingDate,
                             binding.editTextSubject.getText().toString(),
-                            binding.editTextMail.getText().toString()
-                            //getMail()
+                            getEmailFromChipGroup()
                     );
                     apiService.creatMeeting(meeting);
                     finish();

@@ -22,9 +22,11 @@
 
     <Spinner
         android:id="@+id/spinnerRoom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="40dp"
+        android:gravity="right"
         app:layout_constraintStart_toEndOf="@id/tvReunion"
         app:layout_constraintTop_toTopOf="@id/tvReunion" />
 
@@ -99,12 +101,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="70dp"
         android:layout_marginRight="30dp"
         android:hint="Adresse E-mail :"
         android:imeOptions="actionDone"
         android:inputType="textEmailAddress"
-        android:padding="15dp"
+        android:paddingStart="15dp"
         android:textColor="#A6000000"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -119,6 +121,7 @@
         android:layout_marginBottom="15dp"
         android:clickable="true"
         android:focusable="true"
+        app:tint="@android:color/white"
         android:src="@drawable/ic_check_24"
         app:backgroundTint="#E60DC450"
         app:fabCustomSize="70dp"
