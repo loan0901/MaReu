@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/filterRoom"
+        app:showAsAction="never"
+        android:title="Filtrer par Salle"/>
+
+    <item
+        android:id="@+id/filterDate"
+        app:showAsAction="never"
+        android:title="Filtrer par date"/>
+
+    <item
+        android:id="@+id/cancel"
+        app:showAsAction="never"
+        android:title="Annuler"/>
+
+</menu>

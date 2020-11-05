@@ -102,18 +102,9 @@ public class AddMeetingActivity extends AppCompatActivity {
                 month = month + 1;
                 String date = dayOfMonth + "/" + month + "/" + year;
                 binding.datePicker.setText(date);
-                meetingDate = getSelectedDate(date);
+                meetingDate = apiService.formatDate(date);
             }
         };
-    }
-
-    private Date getSelectedDate(String dateString) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        try {
-            return formatter.parse(dateString);
-        } catch (ParseException e) {
-            return null;
-        }
     }
 
     private void getMeetingHour() {
