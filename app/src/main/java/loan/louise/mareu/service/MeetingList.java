@@ -10,14 +10,14 @@ import loan.louise.mareu.model.Meeting;
 public  class MeetingList {
 
     public static List<Meeting> MEETINGLIST = Arrays.asList(
-            new Meeting(1, "Réunion A", "16H00",new Date(1930,2,22), "mario", "Lolo@gmail.com"),
-            new Meeting(2, "Réunion B", "16H00",new Date(1930,2,23) , "mario", "Lolo@gmail.com"),
-            new Meeting(3, "Réunion C", "16H00",new Date(1930,2,24) , "mario", "Lolo@gmail.com"),
-            new Meeting(4, "Réunion D", "16H00",new Date(1930,2,25) , "mario", "Lolo@gmail.com"),
-            new Meeting(5, "Réunion E", "16H00",new Date(1930,2,26) , "mario", "Lolo@gmail.com")
+            new Meeting(1, "Salle A", "16H00",new Date(2020,1,1), "mario", "Lolo@gmail.com"),
+            new Meeting(2, "Salle B", "16H00",new Date(2020,2,1) , "mario", "Lolo@gmail.com"),
+            new Meeting(3, "Salle C", "16H00",new Date(2020,3,1) , "mario", "Lolo@gmail.com"),
+            new Meeting(4, "Salle D", "16H00",new Date(2020,4,1) , "mario", "Lolo@gmail.com"),
+            new Meeting(5, "Salle E", "16H00",new Date(2020,5,1) , "mario", "Lolo@gmail.com")
     );
 
-    static List<Meeting> generateMeeting() {
+    public static List<Meeting> generateMeeting() {
         return new ArrayList<>(MEETINGLIST);
     }
 }

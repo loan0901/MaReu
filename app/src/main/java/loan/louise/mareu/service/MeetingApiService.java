@@ -1,5 +1,6 @@
 package loan.louise.mareu.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import loan.louise.mareu.model.Meeting;
@@ -22,6 +23,17 @@ public class MeetingApiService implements ApiService {
     public void creatMeeting(Meeting meeting) {
         meetingList.add(meeting);
     }
+
+    //@Override
+    //public List<Meeting> getMeetingByRoom() {
+    //    List<Meeting> meetingByRoom = new ArrayList<>();
+    //    for(int i = 0; i < meetingList.size(); i++) {
+    //        if (meetingList.get(i).getMeetingRoom().toString()==binding.spinnerSelectRoom.getSelectedItem().toString()){
+    //            meetingByRoom.add(meetingList.get(i));
+    //        }
+    //    }
+    //    return meetingByRoom;
+    //}
 
 
 }

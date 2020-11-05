@@ -11,4 +11,6 @@ public interface ApiService {
     void deleteMeeting(Meeting meeting);
 
     void creatMeeting(Meeting meeting);
+
+    //List<Meeting> getMeetingByRoom();
 }
