@@ -16,8 +16,6 @@ import loan.louise.mareu.model.Meeting;
 
     public class MeetingViewHolder extends RecyclerView.ViewHolder {
 
-        private MeetingItemBinding binding;
-
         ImageView colorImage;
         TextView meetingRoomTextView;
         TextView mailTextView;

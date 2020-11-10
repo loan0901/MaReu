@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,6 @@ public class AddMeetingActivity extends AppCompatActivity {
     private AddMeetingBinding binding;
     private ApiService apiService;
     private int meetingHour, meetingMinute;
-    private Date meetingDate;
     DatePickerDialog.OnDateSetListener setListenerDate;
     TimePickerDialog.OnTimeSetListener setListenerTime;
     private String emailResult;
@@ -101,8 +101,8 @@ public class AddMeetingActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
                 String date = dayOfMonth + "/" + month + "/" + year;
+                Log.d("date","add date: " + date);
                 binding.datePicker.setText(date);
-                meetingDate = apiService.formatDate(date);
             }
         };
     }
@@ -140,7 +140,11 @@ public class AddMeetingActivity extends AppCompatActivity {
         ChipGroup chipGroup = binding.emailsGroup;
         for (int i = 0; i < chipGroup.getChildCount(); i++) {
             Chip chip = (Chip) chipGroup.getChildAt(i);
-            emailResult = emailResult + chip.getText().toString() + ", ";
+            if (emailResult==null) {
+                emailResult = chip.getText().toString() + ", ";
+            } else {
+                emailResult = emailResult + chip.getText().toString() + ", ";
+            }
         }
         return emailResult;
     }
@@ -159,7 +163,7 @@ public class AddMeetingActivity extends AppCompatActivity {
                             System.currentTimeMillis(),
                             binding.spinnerRoom.getSelectedItem().toString(),
                             binding.timePicker.getText().toString(),
-                            meetingDate,
+                            binding.datePicker.getText().toString(),
                             binding.editTextSubject.getText().toString(),
                             getEmailFromChipGroup()
                     );

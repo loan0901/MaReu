@@ -52,12 +52,11 @@ public class MeetingApiService implements ApiService {
     }
 
     @Override
-    public List<Meeting> getMeetingByDate(Date meetingDate) {
+    public List<Meeting> getMeetingByDate(String meetingDate) {
         List<Meeting> meetingList = MeetingList.generateMeeting();
         List<Meeting> meetingByDate = new ArrayList<>();
         for(int i = 0; i < meetingList.size(); i++) {
-            // modifier le ".equals"
-            if (meetingList.get(i).getMeetingDate().compareTo(meetingDate)==0){
+            if (meetingList.get(i).getMeetingDate().equals(meetingDate)){
                 meetingByDate.add(meetingList.get(i));
             }
         }

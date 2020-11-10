@@ -17,5 +17,5 @@ public interface ApiService {
 
     List<Meeting> getMeetingByRoom(String meetingRoom);
 
-    List<Meeting> getMeetingByDate(Date meetingDate);
+    List<Meeting> getMeetingByDate(String meetingDate);
 }

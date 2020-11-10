@@ -21,12 +21,10 @@
 
     <Spinner
         android:id="@+id/spinnerRoom"
-        android:layout_width="match_parent"
+        android:layout_width="335dp"
         android:layout_height="35dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="40dp"
         android:gravity="right"
-        app:layout_constraintStart_toEndOf="@id/tvReunion"
+        app:layout_constraintStart_toStartOf="@id/tvReunion"
         app:layout_constraintTop_toTopOf="@id/tvReunion" />
 
     <TextView
