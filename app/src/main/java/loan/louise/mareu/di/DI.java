@@ -1,4 +1,4 @@
-package loan.louise.mareu.DI;
+package loan.louise.mareu.di;
 
 import loan.louise.mareu.service.ApiService;
 import loan.louise.mareu.service.MeetingApiService;

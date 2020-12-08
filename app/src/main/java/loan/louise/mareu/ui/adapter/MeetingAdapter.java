@@ -1,4 +1,4 @@
-package loan.louise.mareu.ui;
+package loan.louise.mareu.ui.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
-import loan.louise.mareu.Event.DeleteMeetingEvent;
+import loan.louise.mareu.event.DeleteMeetingEvent;
 import loan.louise.mareu.R;
 import loan.louise.mareu.model.Meeting;
 

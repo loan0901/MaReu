@@ -1,5 +1,7 @@
 package loan.louise.mareu.service;
 
+import android.util.Log;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,10 +43,10 @@ public class MeetingApiService implements ApiService {
 
     @Override
     public List<Meeting> getMeetingByRoom(String meetingRoom) {
-        List<Meeting> meetingList = MeetingList.generateMeeting();
+        List<Meeting> meetingList = getMeeting();
         List<Meeting> meetingByRoom = new ArrayList<>();
-        for(int i = 0; i < meetingList.size(); i++) {
-            if (meetingList.get(i).getMeetingRoom().equals(meetingRoom)){
+        for (int i = 0; i < meetingList.size(); i++) {
+            if (meetingList.get(i).getMeetingRoom().equals(meetingRoom)) {
                 meetingByRoom.add(meetingList.get(i));
             }
         }
@@ -53,15 +55,13 @@ public class MeetingApiService implements ApiService {
 
     @Override
     public List<Meeting> getMeetingByDate(String meetingDate) {
-        List<Meeting> meetingList = MeetingList.generateMeeting();
+        List<Meeting> meetingList = getMeeting();
         List<Meeting> meetingByDate = new ArrayList<>();
-        for(int i = 0; i < meetingList.size(); i++) {
-            if (meetingList.get(i).getMeetingDate().equals(meetingDate)){
+        for (int i = 0; i < meetingList.size(); i++) {
+            if (meetingList.get(i).getMeetingDate().contains(meetingDate)) {
                 meetingByDate.add(meetingList.get(i));
             }
         }
         return meetingByDate;
     }
-
-
 }

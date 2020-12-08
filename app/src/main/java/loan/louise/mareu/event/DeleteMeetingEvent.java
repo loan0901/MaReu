@@ -1,4 +1,4 @@
-package loan.louise.mareu.Event;
+package loan.louise.mareu.event;
 
 import loan.louise.mareu.model.Meeting;
 

@@ -5,16 +5,16 @@
     <item
         android:id="@+id/filterRoom"
         app:showAsAction="never"
-        android:title="Filtrer par Salle"/>
+        android:title="@string/filterByRoom"/>
 
     <item
         android:id="@+id/filterDate"
         app:showAsAction="never"
-        android:title="Filtrer par date"/>
+        android:title="@string/filterByDate"/>
 
     <item
         android:id="@+id/cancel"
         app:showAsAction="never"
-        android:title="Annuler"/>
+        android:title="@string/cancel"/>
 
 </menu>

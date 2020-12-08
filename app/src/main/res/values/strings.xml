@@ -1,7 +1,11 @@
 <resources>
 
     <string name="app_name">MaReu</string>
+    <string name="filterLabel">sélectionnez une salle:</string>
     <string name="meeting_label">%1$s - %2$s - %3$s</string>
+    <string name="filterByRoom">Filtrer par Salle</string>
+    <string name="filterByDate">Filtrer par date</string>
+    <string name="cancel">Annuler</string>
 
     <string-array name="meeting_room">
         <item>Salle A</item>
