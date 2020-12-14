@@ -88,7 +88,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(0, 0, 0, hourOfDay, minute);
-        binding.timePicker.setText(DateFormat.format("hh:mm aa", calendar));
+        binding.timePicker.setText(DateFormat.format("hh:mm", calendar));
     }
 
     private void chipItem(String emailAddress) {

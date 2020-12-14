@@ -7,6 +7,5 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:checkable="false"
-    android:text="lloan0901@gmail.com"
     app:chipBackgroundColor="#26000000"
     app:chipMinHeight="35dp" />

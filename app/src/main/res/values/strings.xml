@@ -6,6 +6,11 @@
     <string name="filterByRoom">Filtrer par Salle</string>
     <string name="filterByDate">Filtrer par date</string>
     <string name="cancel">Annuler</string>
+    <string name="eMail">Adresse E-mail :</string>
+    <string name="subject">Sujet de la réunion :</string>
+    <string name="date">select date</string>
+    <string name="time">select time</string>
+    <string name="room">Salle de Réunion :</string>
 
     <string-array name="meeting_room">
         <item>Salle A</item>
