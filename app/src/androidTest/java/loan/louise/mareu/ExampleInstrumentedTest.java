@@ -42,25 +42,25 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void testA_meetingsList_shouldNotBeEmpty() {
-        onView(allOf(withId(R.id.recyclerView), isDisplayed())).check(matches(hasMinimumChildCount(1)));
+        onView(withId(R.id.recyclerView)).check(matches(hasMinimumChildCount(1)));
     }
 
     @Test
     public void testB_deleteButton_shouldRemoveItem() {
-        onView(allOf(withId(R.id.recyclerView), isDisplayed())).check(matches(hasChildCount(5)));
-        onView(allOf(withId(R.id.recyclerView), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(2, new DeleteViewAction()));
-        onView(allOf(withId(R.id.recyclerView), isDisplayed())).check(matches(hasChildCount(4)));
+        onView(withId(R.id.recyclerView)).check(matches(hasChildCount(5)));
+        onView(withId(R.id.recyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(2, new DeleteViewAction()));
+        onView(withId(R.id.recyclerView)).check(matches(hasChildCount(4)));
     }
 
     @Test
     public void testC_openAddActivity() {
-        onView(allOf(withId(R.id.addActivityButton),isDisplayed())).perform(click());
-        onView(allOf(withId(R.id.addMeetingActivity), isDisplayed())).check(matches(isDisplayed()));
+        onView(withId(R.id.addActivityButton)).perform(click());
+        onView(withId(R.id.addMeetingActivity)).check(matches(isDisplayed()));
     }
 
     @Test
     public void testD_createNewMeeting(){
-        onView(allOf(withId(R.id.addActivityButton),isDisplayed())).perform(click());
+        onView(withId(R.id.addActivityButton)).perform(click());
         onView(withId(R.id.timePicker)).perform(click());
         onView(withId(android.R.id.button1)).perform(click());
         onView(withId(R.id.datePicker)).perform(click());
@@ -71,7 +71,7 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.editTextMail)).perform(click(), typeText("test@gmail.com"), pressImeActionButton());
         pressBack();
         onView(withId(R.id.createButton)).perform(click());
-
+        onView(withId(R.id.recyclerView)).check(matches(hasChildCount(5)));
     }
 
     @Test
@@ -80,7 +80,7 @@ public class ExampleInstrumentedTest {
         onView(withText(R.string.filterByDate)).perform(click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2020, 12, 31));
         onView(withId(android.R.id.button1)).perform(click());
-        onView(allOf(withId(R.id.recyclerView), isDisplayed())).check(matches(hasChildCount(1)));
+        onView(withId(R.id.recyclerView)).check(matches(hasChildCount(1)));
     }
 
     @Test
@@ -88,6 +88,6 @@ public class ExampleInstrumentedTest {
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText(R.string.filterByRoom)).perform(click());
         onView(withId(android.R.id.button1)).perform(click());
-        onView(allOf(withId(R.id.recyclerView), isDisplayed())).check(matches(hasChildCount(2)));
+        onView(withId(R.id.recyclerView)).check(matches(hasChildCount(2)));
     }
 }

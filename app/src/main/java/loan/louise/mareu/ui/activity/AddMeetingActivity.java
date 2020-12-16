@@ -139,7 +139,6 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
                         binding.timePicker.getText().toString().isEmpty() ||
                         binding.emailsGroup.getChildCount() < 1 ||
                         binding.editTextSubject.getText().toString().isEmpty()) {
-                    //modifier le toast :
                     Toast.makeText(AddMeetingActivity.this, "réunion incomplète", Toast.LENGTH_LONG).show();
                 } else {
                     Meeting meeting = new Meeting(

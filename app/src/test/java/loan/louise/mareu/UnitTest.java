@@ -44,7 +44,7 @@ public class UnitTest {
     @Test
     public void filterByDate(){
         List<Meeting> meetings = service.getMeeting();
-        assertNotEquals(meetings, service.getMeetingByDate("11/11/2020"));
+        assertNotEquals(meetings, service.getMeetingByDate("30/12/2020"));
     }
 
     @Test
